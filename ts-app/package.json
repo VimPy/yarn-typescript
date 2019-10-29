@@ -1,0 +1,15 @@
+{
+  "name": "ts-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node-dev --respawn --transpileOnly src/index.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^12.11.7",
+    "prettier": "^1.18.2",
+    "ts-node-dev": "^1.0.0-pre.43",
+    "typescript": "^3.6.4"
+  }
+}
