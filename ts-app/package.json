@@ -4,7 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node-dev --respawn --transpileOnly src/index.ts"
+    "start": "ts-node-dev --respawn --transpileOnly src/index.ts",
+    "style:prettier": "prettier --write \"src/**/*.ts\"",
+    "go": "yarn style:prettier && yarn start"
   },
   "devDependencies": {
     "@types/node": "^12.11.7",
