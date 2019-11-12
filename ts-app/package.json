@@ -5,6 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "ts-node-dev --respawn --transpileOnly src/index.ts",
+    "start:interface": "ts-node-dev --respawn --transpileOnly src/interface.ts",
+    "start:function": "ts-node-dev --respawn --transpileOnly src/function.ts",
     "style:prettier": "prettier --write \"src/**/*.ts\"",
     "go": "yarn style:prettier && yarn start"
   },
