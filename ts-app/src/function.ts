@@ -40,3 +40,11 @@ function buildName3(firstName: string, ...restOfName: string[]) {
 }
 let employeeName = buildName3('Joseph', 'Samuel', 'Lucas', 'Mackinzie');
 console.log('employeeName::', employeeName); // employeeName:: JosephSamuel Lucas Mackinzie
+let buildNameFn: (fname: string, ...rest: string[]) => string = buildName3;
+
+//===========================this和箭头函数==============================================
+/*
+JS里，this的值在函数被调用的时候才会指定。
+顶级的非方法式调用会将this视为window。（注意：在严格模式下，this为undefined而不是window）
+箭头函数能保存函数创建时的this值，而不是调用时的值。
+*/
