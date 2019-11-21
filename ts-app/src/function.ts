@@ -48,3 +48,47 @@ JS里，this的值在函数被调用的时候才会指定。
 顶级的非方法式调用会将this视为window。（注意：在严格模式下，this为undefined而不是window）
 箭头函数能保存函数创建时的this值，而不是调用时的值。
 */
+//this参数是个假的参数，它出现在参数列表的最前面
+interface Card {
+    suit: string;
+    card: number;
+}
+interface Deck {
+    suits: string[];
+    cards: number[];
+    createCardPicker(this: Deck): () => Card;
+}
+let deck: Deck = {
+    suits: ['hearts', 'spades', 'clubs', 'diamonds'],
+    cards: Array(52),
+    createCardPicker: function(this: Deck) {
+        return () => {
+            let pickedCard = Math.floor(Math.random() * 52);
+            let pickedSuit = Math.floor(pickedCard / 13);
+            return { suit: this.suits[pickedSuit], card: pickedCard % 13 };
+        };
+    },
+};
+let cardPicker = deck.createCardPicker();
+let pickedCard = cardPicker();
+console.log('card: ', pickedCard.card, ' of ', pickedCard.suit); // card:  12  of  spades
+
+//=======================函数重载==============================
+let suits = ['hearts', 'spades', 'clubs', 'diamonds'];
+// 两个重载
+function pick(x: { suit: string; card: number }[]): number;
+function pick(x: number): { suit: string; card: number };
+function pick(x): any { // 这个并不是重载列表的一部分
+    if (typeof x == 'object') {
+        let pick = Math.floor(Math.random() * x.length);
+        return pick;
+    } else if (typeof x == 'number') {
+        let pickedSuit = Math.floor(x / 13);
+        return { suit: suits[pickedSuit], card: x % 13 };
+    }
+}
+let myDeck = [{ suit: 'diamonds', card: 2 }, { suit: 'spades', card: 10 }, { suit: 'hearts', card: 4 }];
+let pick1 = myDeck[pick(myDeck)];
+let pick2 = pick(15);
+console.log('card: ', pick1.card, ' of ', pick1.suit);
+console.log('card: ', pick2.card, ' of ', pick2.suit);
